@@ -1,4 +1,5 @@
 import 'package:crud_user_simple/model/user_model.dart';
+import 'package:crud_user_simple/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 
 class UserListTile extends StatelessWidget {
@@ -18,7 +19,12 @@ class UserListTile extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(
+                AppRoutes.USER_FORM,
+                arguments: user,
+              );
+            },
             icon: const Icon(Icons.edit),
           ),
           IconButton(
