@@ -1,6 +1,8 @@
 import 'package:crud_user_simple/model/user_model.dart';
+import 'package:crud_user_simple/provider/users_provider.dart';
 import 'package:crud_user_simple/routes/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserListTile extends StatelessWidget {
   final User user;
@@ -28,7 +30,30 @@ class UserListTile extends StatelessWidget {
             icon: const Icon(Icons.edit),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (ctx) => AlertDialog(
+                  title: const Text('Excluir usuário'),
+                  content: const Text('Tem certeza?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(false),
+                      child: const Text('Não'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(true),
+                      child: const Text('Sim'),
+                    ),
+                  ],
+                ),
+              ).then((confirmed) {
+                if (confirmed) {
+                  Provider.of<UsersProvider>(context, listen: false)
+                      .remove(user);
+                }
+              });
+            },
             icon: const Icon(Icons.delete),
           )
         ],

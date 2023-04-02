@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         routes: {
           AppRoutes.HOME: (context) => const UserListView(),
-          AppRoutes.USER_FORM: (context) => const UserForm(),
+          AppRoutes.USER_FORM: (context) => UserForm(),
         },
       ),
     );
